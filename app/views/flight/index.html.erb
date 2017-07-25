@@ -1,0 +1,13 @@
+<h1>Flight Index</h1>
+<div class="container">
+  <table>
+    <th>Depature</th>
+    <th>Arrival</th>
+    <% @flights.each do |flight| %>
+      <tr>
+        <td><%= flight.departure_airport.code %></td>
+        <td><%= flight.arrival_airport.code %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

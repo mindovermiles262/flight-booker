@@ -6,6 +6,10 @@ class AirportTest < ActiveSupport::TestCase
     @airport = Airport.create(code: "ALD")
   end
 
+  test "the setup" do
+    assert @airport.valid?
+  end
+
   test "Airport codes are length 3" do 
     @airport.code = "AA"
     assert_not @airport.valid?
