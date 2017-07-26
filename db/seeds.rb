@@ -21,15 +21,18 @@ end
 Flight.delete_all if Rails.env.development?
 departure = Airport.find_by(code: "SFO")
 arrival   = Airport.find_by(code: "DEN")
-Flight.create(departure_airport: departure, arrival_airport: arrival,
-              take_off: Time.now, duration: 3.hours.to_i)
+Flight.create(departure_airport_id: departure.id, 
+              arrival_airport_id:   arrival.id,
+              take_off:             Time.now, 
+              duration:             3.hours.to_i)
 
 Airport.take(4).each do |departure|
   Airport.all.each do |arrival|
     unless departure == arrival
-    Flight.create(departure_airport: departure, arrival_airport: arrival,
-                  take_off: Faker::Time.forward(10), 
-                  duration: 3.hours.to_i)
+    Flight.create(departure_airport_id: departure.id, 
+                  arrival_airport_id:   arrival.id,
+                  take_off:             Faker::Time.forward(10), 
+                  duration:             3.hours.to_i)
     end
   end
 end

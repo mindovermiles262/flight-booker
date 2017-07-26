@@ -9,11 +9,11 @@ class FlightController < ApplicationController
   end
 
   def index
-    @departures = Flight.select("DISTINCT departure_airport_id").all.map do |d|
-      [d.departure_airport.name, d.departure_airport_id]
+    @departures = Flight.select("DISTINCT departure_airport_id").all.map do |df|
+      [df.departure_airport.name, df.departure_airport.id]
     end
-    @arrivals = Flight.select("DISTINCT arrival_airport_id").all.map do |a|
-      [a.arrival_airport.name, a.arrival_airport_id]
+    @arrivals = Flight.select("DISTINCT arrival_airport_id").all.map do |af|
+      [af.arrival_airport.name, af.arrival_airport.id]
     end
   end
 
