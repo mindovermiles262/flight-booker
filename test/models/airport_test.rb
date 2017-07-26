@@ -3,7 +3,7 @@ require 'test_helper'
 class AirportTest < ActiveSupport::TestCase
 
   def setup
-    @airport = Airport.create(code: "ALD")
+    @airport = Airport.create(code: "ALD", name: "Duss International Airport")
   end
 
   test "the setup" do
@@ -17,6 +17,11 @@ class AirportTest < ActiveSupport::TestCase
     assert_not @airport.valid?
     @airport.code = "AAA"
     assert @airport.valid?
+  end
+
+  test "Airports have names" do
+    @airport.name = "  "
+    assert_not @airport.valid?
   end
 
   test "Airport codes are letters only" do
