@@ -1,13 +1,12 @@
 <h1>Flight Index</h1>
 <div class="container">
-  <table>
-    <th>Depature</th>
-    <th>Arrival</th>
-    <% @flights.each do |flight| %>
-      <tr>
-        <td><%= flight.departure_airport.code %></td>
-        <td><%= flight.arrival_airport.code %></td>
-      </tr>
-    <% end %>
-  </table>
+<table>
+  <th>Departing</th>
+  <th>Arriving</th>
+  <tr>
+    <td><%= select_tag(:departure_id, options_for_select(@departures)) %></td>
+    <td><%= select_tag(:arrival_id, options_for_select(@arrivals)) %></td>
+  </tr>
+
+</table>
 </div>
