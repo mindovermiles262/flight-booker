@@ -4,4 +4,6 @@ Rails.application.routes.draw do
 
   root 'flight#index'
 
+  get 'flights', to: 'flights#index'
+
 end

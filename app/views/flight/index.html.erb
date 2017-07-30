@@ -1,12 +1,24 @@
 <h1>Flight Index</h1>
 <div class="container">
-<table>
-  <th>Departing</th>
-  <th>Arriving</th>
-  <tr>
-    <td><%= select_tag(:departure_id, options_for_select(@departures)) %></td>
-    <td><%= select_tag(:arrival_id, options_for_select(@arrivals)) %></td>
-  </tr>
 
-</table>
-</div>
+<%= form_tag flights_path, method: 'get' do %>
+  <div class="form_select" id="departure_select">
+    <%= label_tag "Departure Airport" %>
+    <%= select_tag(:departure_id, options_for_select(@departures)) %>
+  </div>
+  <div class="form_select" id="arrival_select">
+    <%= label_tag "Arrival Airport" %>
+    <%= select_tag(:arrival_id, options_for_select(@arrivals)) %>
+  </div>
+  <div class="form_select" id="passengers_select">
+    <%= label_tag "Passengers" %>
+    <%= select_tag(:seats, options_for_select(@seats)) %>
+  </div>
+  <div class="form_select" id="flight_date_select">
+    <%= label_tag "Flight Date" %>
+    <%= select_tag(:take_off, options_for_select(@date)) %>
+  </div>
+  <div>
+    <%= submit_tag "Search for Flight" %>
+  </div>
+<% end %>
