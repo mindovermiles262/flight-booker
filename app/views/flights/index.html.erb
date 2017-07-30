@@ -1,4 +1,4 @@
-<h1>Flight Index</h1>
+<h1>Search Index</h1>
 <div class="container">
 
 <%= form_tag flights_path, method: 'get' do %>
@@ -16,9 +16,31 @@
   </div>
   <div class="form_select" id="flight_date_select">
     <%= label_tag "Flight Date" %>
-    <%= select_tag(:take_off, options_for_select(@date)) %>
+    <%= select_tag(:take_off, options_for_select(@date)).to_s %>
   </div>
   <div>
-    <%= submit_tag "Search for Flight" %>
+    <%= submit_tag "Search for Flight", name: nil %>
   </div>
+<% end %>
+
+<% if @search.length > 0 %>
+  <h2>Available Flights</h2>
+  <table>
+    <tr>
+      <th>Departure Airport</th>
+      <th></th>
+      <th>Arrival Airport</th>
+      <th></th>
+      <th>Departure Date</th>
+    </tr>
+    <% @search.each do |f| %>
+      <tr>
+        <td><%= f.departure_airport.code %></td>
+        <td></td>
+        <td><%= f.arrival_airport.code %></td>
+        <td></td>
+        <td><%= f.take_off.to_s(:short) %></td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>

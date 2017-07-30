@@ -1,5 +1,4 @@
-class FlightController < ApplicationController
-
+class FlightsController < ApplicationController
   def new
     @flight = Flight.new
   end
@@ -21,15 +20,15 @@ class FlightController < ApplicationController
 
     @date = Array.new
     Flight.all.each do |f| 
-      take_off_date = f.take_off.strftime("%B %d")
+      take_off_date = f.take_off # .strftime("%B %d")
       @date << take_off_date unless @date.include?(take_off_date)
     end
   
-    if params[:departure_id]
-      @search = Flight.where(departure_airport_id: "#{params[:departure_id]}")
+    @search = Flight.where("departure_airport_id = ? AND
+                              arrival_airport_id   = ?",
+                              params[:departure_id],
+                              params[:arrival_id])
     end
-
-  end
 
   def show
   end
@@ -40,5 +39,4 @@ private
     params.require(:flights).allow(:departure_airport_id, :arrival_airport_id,
                                   :take_off, :duration)
   end
-
 end
