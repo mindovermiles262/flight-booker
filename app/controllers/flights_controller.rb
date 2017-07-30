@@ -1,11 +1,4 @@
 class FlightsController < ApplicationController
-  def new
-    @flight = Flight.new
-  end
-
-  def create
-    @flight = Flight.create(flight_params)
-  end
 
   def index
     @departures = Flight.select("DISTINCT departure_airport_id").all.map do |df|
@@ -20,7 +13,7 @@ class FlightsController < ApplicationController
 
     @date = Array.new
     Flight.all.each do |f| 
-      take_off_date = f.take_off # .strftime("%B %d")
+      take_off_date = f.take_off.strftime("%B %d")
       @date << take_off_date unless @date.include?(take_off_date)
     end
   
@@ -29,9 +22,6 @@ class FlightsController < ApplicationController
                               params[:departure_id],
                               params[:arrival_id])
     end
-
-  def show
-  end
 
 private
   
