@@ -4,8 +4,14 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+one: 
+  departure_airport_id: 1
+  arrival_airport_id: 2
+  take_off: "2017-08-05 20:25:38"
+  duration: 10800
+
+two: 
+  departure_airport_id: 2
+  arrival_airport_id: 1
+  take_off: "2017-08-05 20:25:38"
+  duration: 10800
