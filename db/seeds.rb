@@ -36,3 +36,7 @@ Airport.take(4).each do |departure|
     end
   end
 end
+
+# Seed Passengers
+Passenger.delete_all if Rails.env.development?
+Passenger.create(name: "User", email: "user@example.com")
