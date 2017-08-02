@@ -33,6 +33,8 @@ gem 'jbuilder', '~> 2.5'
 
 # Faker gem for DB seeding
 gem 'faker', '~> 1.8'
+# Bulma CSS Framework
+gem "bulma-rails", "~> 0.4.3"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
