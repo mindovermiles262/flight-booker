@@ -4,12 +4,14 @@ class FlightsController < ApplicationController
     @departures = Flight.select("DISTINCT departure_airport_id").all.map do |df|
       [df.departure_airport.name, df.departure_airport.id]
     end
+    @departures.unshift([nil])
 
     @arrivals = Flight.select("DISTINCT arrival_airport_id").all.map do |af|
       [af.arrival_airport.name, af.arrival_airport.id]
     end
+    @arrivals.unshift([nil])
     
-    @seats = [1, 2, 3, 4]
+    @seats = [nil, 1, 2, 3, 4]
 
     @date = Array.new
     Flight.all.each do |f| 
