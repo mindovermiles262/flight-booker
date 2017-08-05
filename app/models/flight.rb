@@ -15,4 +15,22 @@ class Flight < ApplicationRecord
     select(:arrival_id).distinct
   end
 
+  def self.date_list
+    date = Flight.all.order(departure_time: :asc)
+    date.map { |f| f.departure_time.strftime("%b %d %Y") }.uniq
+  end
+
+  def self.lookup(departure, arrival, day)
+    Flight.where(departure_id: departure,
+                 arrival_id: arrival,
+                 departure_time: filter_date(day))
+  end
+
+  def self.filter_date(date)
+    unless date.nil?
+    date = date.to_date
+    date.beginning_of_day..date.end_of_day
+    end
+  end
+
 end

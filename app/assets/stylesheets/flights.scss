@@ -1,3 +1,21 @@
-// Place all the styles related to the flights controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.border {
+  border: 1px solid black;
+}
+
+.bg-translucent {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+}
+
+.section {
+  background-color: transparent !important;
+}
+
+table {
+  tbody tr td {
+    text-align: center;
+  }
+  thead tr th {
+    text-align: center;
+  }
+}

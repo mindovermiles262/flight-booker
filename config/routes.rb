@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-  resources :airports
-  root 'flights#show'
+  root 'flights#index'
+  resources :flights, only: [:index]
+  get 'flights', to: 'flights#index'
 end

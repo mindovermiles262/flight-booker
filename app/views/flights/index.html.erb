@@ -1,0 +1,66 @@
+<section class="columns section">
+  <%= form_tag flights_path, method: 'get', class: 'bg-translucent column is-4 is-offset-1' do %>
+    <h2>Search for Flight</h2>
+    <div class="field column has-text-centered">
+      <label for="departing" class="label">Departing</label>
+      <div class="control column is-8 is-offset-2">
+          <%= select_tag(:departing, 
+            options_for_select(@departures, selected: params[:departing]), 
+            class: 'select is-fullwidth',
+            required: true, 
+            include_blank: true) %>
+      </div>
+
+      <label for="arriving" class="label">Arriving</label>
+      <div class="control column is-8 is-offset-2">
+        <%= select_tag(:arriving, 
+          options_for_select(@arrivals, selected: params[:arriving]),
+          class: 'select is-fullwidth', 
+          required: true, 
+          include_blank: true) %>
+      </div>
+
+      <label for="date" class="label">Date</label>
+      <div class="control column is-8 is-offset-2">
+        <%= select_tag(:date, 
+          options_for_select(@dates, selected: params[:date]),
+          class: 'select is-fullwidth', 
+          required: true,
+          include_blank: true) %>
+      </div>
+
+      <%= submit_tag "Search", class: 'button is-info' %>
+    
+    </div>
+  <% end %>
+  <% unless @flights.nil? %>
+    <% if @flights.length > 0 %>
+      <div class="column is-4 is-offset-2 bg-translucent">
+        <h2>Select Flight</h2><br />
+        <table>
+          <thead>
+            <th></th>
+            <th>Departing</th>
+            <th>Arriving</th>
+            <th>Date</th>
+          </thead>
+          <tbody>
+            <% @flights.each do |f| %>
+              <tr>
+                <td><%= radio_button_tag(:sel_flight, "IDK") %></td>
+                <td><%= f.departure.code %></td>
+                <td><%= f.arrival.code %></td>
+                <td><%= f.departure_time.to_time.strftime("%b %d %Y") %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% elsif params[:commit] == "Search" %>
+      <div class="column is-4 is-offset-2 bg-translucent">
+        <h2>Could not Find Flight Matching Criteria</h2>
+        <h2>Please try again</h2>
+      </div>
+    <% end %>
+  <% end %>
+</div>
