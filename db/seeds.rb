@@ -1,3 +1,6 @@
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+
 # Seed Airports (n=10)
 Airport.delete_all if Rails.env.development?
 airport_codes = %w[ATL LAX ORD DFW JFK DEN SFO CLT LAS PHX]
@@ -17,26 +20,24 @@ airport_codes.each do |code|
   i += 1
 end
 
-# Seed Flights (n=37)
+# Seed Flights
 Flight.delete_all if Rails.env.development?
-departure = Airport.find_by(code: "SFO")
-arrival   = Airport.find_by(code: "DEN")
-Flight.create(departure_airport_id: departure.id, 
-              arrival_airport_id:   arrival.id,
-              take_off:             Time.now, 
-              duration:             3.hours.to_i)
-
-Airport.take(4).each do |departure|
-  Airport.all.each do |arrival|
-    unless departure == arrival
-    Flight.create(departure_airport_id: departure.id, 
-                  arrival_airport_id:   arrival.id,
-                  take_off:             Faker::Time.forward(10), 
-                  duration:             3.hours.to_i)
+fn = 900
+dep = Airport.find_by(code: "SFO")
+arr   = Airport.find_by(code: "DEN")
+Flight.create(departure: dep, 
+              arrival: arr,
+              departure_time: Time.now,
+              number: fn)
+fn = 901
+Airport.take(4).each do |dep|
+  Airport.all.each do |arr|
+    unless dep == arr
+    Flight.create(departure: dep, 
+                  arrival:   arr,
+                  departure_time: Faker::Time.forward(10),
+                  number: fn)
+    fn += 1
     end
   end
 end
-
-# Seed Passengers
-Passenger.delete_all if Rails.env.development?
-Passenger.create(name: "User", email: "user@example.com")

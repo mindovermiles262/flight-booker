@@ -1,9 +1,24 @@
-# Flight Booker
+# README
 
-A project from [The Odin Project](https://www.theodinproject.com)'s Ruby on Rails curriculum.  More information can be found [here](https://www.theodinproject.com/courses/ruby-on-rails/lessons/building-advanced-forms)
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-## Purpose
+Things you may want to cover:
 
-Flight booker is a ficticious app designed for passengers to book airline flights.
+* Ruby version
 
-This project tests the developers ability to integrate nested forms to create the application.
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...

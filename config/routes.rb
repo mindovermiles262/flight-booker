@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  resources :airports,  only: [:new, :create, :index, :show]
-  resources :flights,   only: [:new, :create, :index, :show]
-
-  root 'flights#index'
-
-  get 'flights', to: 'flights#index'
-
+  resources :airports
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
