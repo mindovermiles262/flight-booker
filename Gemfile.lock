@@ -43,6 +43,8 @@ GEM
     arel (8.0.0)
     bindex (0.5.0)
     builder (3.2.3)
+    bulma-rails (0.4.3)
+      sass (~> 3.2)
     byebug (9.0.6)
     capybara (2.15.0)
       addressable
@@ -201,6 +203,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bulma-rails (~> 0.4.3)
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)

@@ -1,0 +1,17 @@
+<h1>Flights#Show</h1>
+<div class="columns">
+  <%= form_tag do %>
+    <div class="field column">
+      <label for="departing" class="label">Departing</label>
+      <div class="control">
+        <%= select_tag(:departing, options_for_select(@departures), class: 'select' ) %>
+      </div>
+    </div>
+    <div class="field column">
+      <label for="arriving" class="label">Arriving</label>
+      <div class="control">
+        <%= select_tag(:arriving, options_for_select(@arrivals), class: 'select' ) %>
+      </div>
+    </div>
+  <% end %>
+</div>
