@@ -1,3 +1,19 @@
-<h1>Bookings#new</h1>
-
-<%= debug(params) if Rails.env.development? %>
+<div class="columns section">
+  <%= form_for @booking, html: { class: 'column' } do |b| %>
+    <% params[:passengers].to_i.times do |n| %>
+      <%= b.fields_for :passenger, html: { class: 'column' } do |p| %>
+        <div class="bg-translucent column">
+          <%= label_tag(:name, "Passenger #{n + 1} Name", class: 'label') %>
+          <%= p.text_field :name, class: 'input', requred: true %>
+          <%= label_tag(:email, "Email Address", class: 'label') %>
+          <%= p.text_field :email, class: 'input', required: true %>
+        </div>
+      <% end %>
+    <% end %>
+</div>
+  <div class="column has-text-centered">
+    <%= hidden_field_tag :passengers, params[:passengers]  %>
+    <%= b.hidden_field "flight_id", value: @flight.id %>
+    <%= button_to "Book Flight", type: 'submit', class: 'button is-primary is-large' %>
+  </div>
+  <% end %>
