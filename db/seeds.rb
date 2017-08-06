@@ -22,14 +22,16 @@ end
 
 # Seed Flights
 Flight.delete_all if Rails.env.development?
-fn = 900
-dep = Airport.find_by(code: "SFO")
-arr   = Airport.find_by(code: "DEN")
-Flight.create(departure: dep, 
-              arrival: arr,
-              departure_time: Time.now,
-              number: fn)
-fn = 901
+fn = 899
+4.times do |f|
+  dep = Airport.find_by(code: "SFO")
+  arr   = Airport.find_by(code: "DEN")
+  Flight.create(departure: dep, 
+                arrival: arr,
+                departure_time: Time.now + f.hours,
+                number: fn + f)
+end
+fn = 905
 Airport.take(4).each do |dep|
   Airport.all.each do |arr|
     unless dep == arr

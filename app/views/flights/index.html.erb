@@ -1,6 +1,6 @@
 <section class="columns section">
   <%= form_tag flights_path, method: 'get', class: 'bg-translucent column is-4 is-offset-1' do %>
-    <h2>Search for Flight</h2>
+    <h2 class="title is-2">Search for Flight</h2>
     <div class="field column has-text-centered">
       <label for="departing" class="label">Departing</label>
       <div class="control column is-8 is-offset-2">
@@ -28,40 +28,53 @@
           required: true,
           include_blank: true) %>
       </div>
+
+    <label for="passengers" class="label">Number of Passengers</label>
+    <div class="control column is-8 is-offset-2">
+      <%= select_tag(:passengers,
+        options_for_select(@passengers, selected: params[:passengers]),
+        class: 'select is-fullwidth',
+        required: true,
+        include_blank: true) %>
+    </div>
+
       <%= submit_tag "Search", class: 'button is-info' %>
     </div>
   <% end %>
   <% unless @flights.nil? %>
     <% if @flights.length > 0 %>
-      <div class="column is-4 is-offset-2 bg-translucent">
-        <h2>Select Flight</h2><br />
+      <div class="column is-4 is-offset-2 bg-translucent has-text-centered fit-content" id="select-flight">
+        <h2 class="title is-2">Select A Flight</h2><br />
         <table>
           <thead>
             <th></th>
+            <th>Flight No.</th>
             <th>Departing</th>
-            <th>Arriving</th>
             <th>Date</th>
+            <th>Time</th>
           </thead>
           <tbody>
             <%= form_tag(new_booking_path, method: 'get') do %>
               <% @flights.each do |f| %>
                 <tr>
                   <td><%= radio_button_tag(:selected, f.id) %></td>
-                  <td><%= f.departure.code %></td>
-                  <td><%= f.arrival.code %></td>
+                  <td><%= f.number %></td>
+                  <td><%= f.departure.code + ' > ' + f.arrival.code%></td>
                   <td><%= f.departure_time.to_time.strftime("%b %d %Y") %></td>
+                  <td><%= f.departure_time.strftime("%I:%M %P") %></td>
                 </tr>
               <% end %>
           </tbody>
         </table>
-        <%= submit_tag "Continue to Booking", class: 'button is-primary' %>
+        <%= hidden_field_tag :passengers, params[:passengers] %>
+        <%= submit_tag "Continue to Booking", class: 'button is-primary has-margins' %>
         <% end %>
       </div>
 
     <% elsif params[:commit] == "Search" %>
-      <div class="column is-4 is-offset-2 bg-translucent">
-        <h2>Could not Find Flight Matching Criteria</h2>
-        <h2>Please try again</h2>
+      <div class="column is-4 is-offset-2 bg-translucent fit-content is-centered-virtical">
+        <h2 class="title is-4">Could not Find Matching Flight</h2>
+        <h2 class="title is-4">Please try again</h2>
       </div>
     <% end %>
   <% end %>

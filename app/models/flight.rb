@@ -26,10 +26,12 @@ class Flight < ApplicationRecord
                  departure_time: day_range(day))
   end
 
+  private
+
   def self.day_range(date)
     unless date.nil?
-    date = date.to_date
-    date.beginning_of_day..date.end_of_day
+      date = date.to_date
+      date.beginning_of_day..date.end_of_day
     end
   end
 
