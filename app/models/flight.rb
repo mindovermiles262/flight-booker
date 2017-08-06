@@ -5,6 +5,7 @@ class Flight < ApplicationRecord
 
   belongs_to :departure, class_name: "Airport"
   belongs_to :arrival, class_name: "Airport"
+  has_many :bookings
 
   def self.departure_list
     select(:departure_id).distinct
@@ -22,10 +23,10 @@ class Flight < ApplicationRecord
   def self.lookup(departure, arrival, day)
     Flight.where(departure_id: departure,
                  arrival_id: arrival,
-                 departure_time: filter_date(day))
+                 departure_time: day_range(day))
   end
 
-  def self.filter_date(date)
+  def self.day_range(date)
     unless date.nil?
     date = date.to_date
     date.beginning_of_day..date.end_of_day

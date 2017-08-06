@@ -1,10 +1,12 @@
 require 'rails_helper'
 
-describe Airport do
-
+RSpec.describe Airport, type: :model do
   before do
     @airport = FactoryGirl.create(:airport)
   end
+
+  it { should have_many(:departures).class_name("Flight") }
+  it { should have_many(:arrivals).class_name("Flight") }
 
   it "is valid with a name and 3-letter code" do
     expect(@airport).to be_valid

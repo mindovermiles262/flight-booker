@@ -28,9 +28,7 @@
           required: true,
           include_blank: true) %>
       </div>
-
       <%= submit_tag "Search", class: 'button is-info' %>
-    
     </div>
   <% end %>
   <% unless @flights.nil? %>
@@ -45,17 +43,21 @@
             <th>Date</th>
           </thead>
           <tbody>
-            <% @flights.each do |f| %>
-              <tr>
-                <td><%= radio_button_tag(:sel_flight, "IDK") %></td>
-                <td><%= f.departure.code %></td>
-                <td><%= f.arrival.code %></td>
-                <td><%= f.departure_time.to_time.strftime("%b %d %Y") %></td>
-              </tr>
-            <% end %>
+            <%= form_tag(new_booking_path, method: 'get') do %>
+              <% @flights.each do |f| %>
+                <tr>
+                  <td><%= radio_button_tag(:selected, f.id) %></td>
+                  <td><%= f.departure.code %></td>
+                  <td><%= f.arrival.code %></td>
+                  <td><%= f.departure_time.to_time.strftime("%b %d %Y") %></td>
+                </tr>
+              <% end %>
           </tbody>
         </table>
+        <%= submit_tag "Continue to Booking", class: 'button is-primary' %>
+        <% end %>
       </div>
+
     <% elsif params[:commit] == "Search" %>
       <div class="column is-4 is-offset-2 bg-translucent">
         <h2>Could not Find Flight Matching Criteria</h2>
