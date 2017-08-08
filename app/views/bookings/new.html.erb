@@ -12,8 +12,7 @@
     <% end %>
 </div>
   <div class="column has-text-centered">
-    <%= hidden_field_tag :passengers, params[:passengers]  %>
-    <%= b.hidden_field "flight_id", value: @flight.id %>
-    <%= b.submit "Book Flight", type: 'submit', class: 'button is-primary is-large' %>
+    <%= b.hidden_field "flight_id", value: params[:selected] %>
+    <%= b.submit "Book Flight", type: 'submit', name: nil, class: 'button is-primary is-large' %>
   </div>
   <% end %>

@@ -1,0 +1,13 @@
+Show
+<div class="content bg-translucent">
+  <div class="column">
+    <p><%= @booking.passenger.name %></p>
+    <p><%= @booking.passenger.email %></p>
+    <p>Departing:
+      <%= @booking.flight.departure.name %> (<%= @booking.flight.departure.code %>)</p>
+    <p>Arriving:
+      <%= @booking.flight.arrival.name %> (<%= @booking.flight.arrival.code %>)</p>
+    <p>Take Off (UTC):
+      <%= @booking.flight.departure_time.strftime("%d %^b %Y at I:%M %P") %></p>
+  </div>
+</div>
