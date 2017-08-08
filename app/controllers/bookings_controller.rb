@@ -1,18 +1,18 @@
 class BookingsController < ApplicationController
   def new
-    @booking = Booking.new
-    @passenger = Passenger.new
-    # @flight = Flight.find(params[:selected])
+    @manifest = []
+    params[:passengers].to_i.times do |p|
+      @manifest << Passenger.new
+    end
   end
 
   def create
-    @booking = Booking.new(booking_params)
-
-    if @booking.save
-      redirect_to @booking
-    else
-      @message = "NOT WORKING"
+    params[:passengers].each do |m|
+      if m["name"] != "" && m["email"] != ""
+        Passenger.create(booking_params(m))
+      end
     end
+    redirect_to root_path
   end
 
   def show
@@ -21,9 +21,8 @@ class BookingsController < ApplicationController
 
   private
 
-  def booking_params
-    params.require(:booking).permit(:flight_id, 
-                  {:passengers_attributes => [:id, :name, :email]})
+  def booking_params(custom_params)
+    custom_params.permit(:name, :email)
   end
 
 end

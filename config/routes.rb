@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :bookings
   resources :passengers
   get 'flights', to: 'flights#index'
+  post 'bookings/new', to: 'bookings#create'
 end
