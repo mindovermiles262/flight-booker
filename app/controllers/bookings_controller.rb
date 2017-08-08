@@ -23,7 +23,11 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:flight_id, 
+<<<<<<< HEAD
                   {:passengers_attributes => [:id, :name, :email]})
+=======
+                  {:passenger_attributes => [:id, :name, :email]})
+>>>>>>> e0418b2f27d3708bc1ae8a30130847c6adc5705d
   end
 
 end
