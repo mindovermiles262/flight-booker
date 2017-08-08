@@ -1,7 +1,7 @@
 <div class="section">
   <%= form_for setup_booking(@booking), html: { class: 'columns' } do |b| %>
     <% params[:passengers].to_i.times do |n| %>
-      <%= b.fields_for :passenger, html: { class: 'column' } do |p| %>
+      <%= b.fields_for :passengers, html: { class: 'column' } do |p| %>
         <div class="bg-translucent column has-margins">
           <%= label_tag(:name, "Passenger #{n + 1} Name", class: 'label') %>
           <%= p.text_field :name, class: 'input', requred: true %>
