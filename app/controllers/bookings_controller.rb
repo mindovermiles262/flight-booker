@@ -7,12 +7,17 @@ class BookingsController < ApplicationController
   end
 
   def create
+    booking_passengers = []
     params[:passengers].each do |m|
       if m["name"] != "" && m["email"] != ""
-        Passenger.create(booking_params(m))
+        booking_passengers << Passenger.create(booking_params(m))
       end
     end
-    redirect_to root_path
+    @booking = Booking.new(flight: Flight.find(params[:flight_id]),
+                        passenger: booking_passengers)
+    if @booking.save
+      redirect_to @booking
+    end
   end
 
   def show
