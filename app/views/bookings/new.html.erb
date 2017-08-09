@@ -1,18 +1,40 @@
-<div class="section">
-  <%= form_for setup_booking(@booking), html: { class: 'columns' } do |b| %>
-    <% params[:passengers].to_i.times do |n| %>
-      <%= b.fields_for :passengers, html: { class: 'column' } do |p| %>
-        <div class="bg-translucent column has-margins">
-          <%= label_tag(:name, "Passenger #{n + 1} Name", class: 'label') %>
-          <%= p.text_field :name, class: 'input', requred: true %>
-          <%= label_tag(:email, "Email Address", class: 'label') %>
-          <%= p.text_field :email, class: 'input', required: true %>
-        </div>
-      <% end %>
+<%= form_for bookings_path do %>
+  <%= @manifest.each do |m| %>
+
+    <%= fields_for 'passengers[]', m do |p| %>
+    <div class="fields">
+      <%= p.label :name %>
+      <%= p.text_field :name %>
+    </div>
+    <div class="fields">
+      <%= p.label :email %>
+      <%= p.text_field :email %>
+    </div>
     <% end %>
+
+  <% end %>
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>
+
+<!-- 
+<div class="section">
+  <#%= form_for setup_booking(@booking), html: { class: 'columns' } do |b| %>
+    <#% params[:passengers].to_i.times do |n| %>
+      <#%= b.fields_for :passengers, html: { class: 'column' } do |p| %>
+        <div class="bg-translucent column has-margins">
+          <#%= label_tag(:name, "Passenger #{n + 1} Name", class: 'label') %>
+          <#%= p.text_field :name, class: 'input', requred: true %>
+          <#%= label_tag(:email, "Email Address", class: 'label') %>
+          <#%= p.text_field :email, class: 'input', required: true %>
+        </div>
+      <#% end %>
+    <#% end %>
 </div>
   <div class="column has-text-centered">
-    <%= b.hidden_field "flight_id", value: params[:selected] %>
-    <%= b.submit "Book Flight", type: 'submit', name: nil, class: 'button is-primary is-large' %>
+    <#%= b.hidden_field "flight_id", value: params[:selected] %>
+    <#%= b.submit "Book Flight", type: 'submit', name: nil, class: 'button is-primary is-large' %>
   </div>
-  <% end %>
+  <#% end %>
+-->

@@ -42,8 +42,10 @@ ActiveRecord::Schema.define(version: 20170806004746) do
   create_table "passengers", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.integer "booking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_passengers_on_booking_id"
   end
 
 end
