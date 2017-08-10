@@ -9,9 +9,7 @@ class BookingsController < ApplicationController
   def create
     booking_passengers = []
     params[:passengers].each do |m|
-      if m["name"] != "" && m["email"] != ""
         booking_passengers << Passenger.create(booking_params(m))
-      end
     end
     @booking = Booking.new(flight: Flight.find(params[:flight_id]),
                         passenger: booking_passengers)

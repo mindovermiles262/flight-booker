@@ -1,23 +1,25 @@
-<%= form_for bookings_path do %>
-  <%= @manifest.each do |m| %>
+<div class="section">
+  <%= form_for bookings_path do %>
+    <% @manifest.each do |m| %>
 
-    <%= fields_for 'passengers[]', m do |p| %>
-    <div class="fields">
-      <%= p.label :name %>
-      <%= p.text_field :name %>
-    </div>
-    <div class="fields">
-      <%= p.label :email %>
-      <%= p.text_field :email %>
-    </div>
+      <%= fields_for 'passengers[]', m do |p| %>
+      <div class="fields">
+        <%= p.label :name %>
+        <%= p.text_field :name %>
+      </div>
+      <div class="fields">
+        <%= p.label :email %>
+        <%= p.text_field :email %>
+      </div>
+      <% end %>
+
     <% end %>
-
+    <div class="actions">
+      <%= hidden_field_tag :flight_id, params[:selected] %>
+      <%= submit_tag %>
+    </div>
   <% end %>
-  <div class="actions">
-    <%= hidden_field_tag :flight_id, params[:selected] %>
-    <%= submit_tag %>
-  </div>
-<% end %>
+</div>
 
 <!-- 
 <div class="section">
