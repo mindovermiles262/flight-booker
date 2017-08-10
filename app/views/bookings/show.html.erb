@@ -1,9 +1,19 @@
-Show
-<div class="content bg-translucent">
-  <div class="column">
-    <% @booking.passenger.each do |passenger| %>
-      <p>Name: <%= passenger.name %></p>
-      <p>Email: <%= passenger.email %></p>
+<div class="section">
+  <div class="columns">
+    <div class="column bg-translucent has-text-centered has-margins">
+      <h1>Booking Confirmed!</h1>
+    </div>
+  </div>
+  <div class="columns">
+    <% @booking.passenger.each_with_index do |passenger, i| %>
+      <div class="column bg-translucent has-text-centered has-margins">
+        <h2>Passenger <%= i+1 %>: <%= passenger.name %></h2>
+        <h2>Email: <%= passenger.email %></h2>
+      </div>
     <% end %>
+      <div class="column bg-translucent has-text-centered has-margins">
+        <h2><%= @booking.flight.departure.name %></h2>
+        <h2><%= @booking.flight.departure_time.strftime("%I:%M %P on %b %d %Y") %></h2>
+      </div>
   </div>
 </div>
