@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="columns">
-    <% @booking.passenger.each_with_index do |passenger, i| %>
+    <% @booking.passengers.each_with_index do |passenger, i| %>
       <div class="column bg-translucent has-text-centered has-margins">
         <h2>Passenger <%= i+1 %>: <%= passenger.name %></h2>
         <h2>Email: <%= passenger.email %></h2>

@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe Booking, type: :model do
   before do
     flight = FactoryGirl.create(:flight)
-    passenger = FactoryGirl.create(:passenger)
-    @booking = Booking.create(flight: flight, passenger: passenger)
+    passengers = FactoryGirl.create(:passenger)
+    @booking = Booking.create(flight: flight, passengers: [passengers])
   end
 
-  it { should belong_to :passenger }
+  it { should have_many :passengers }
   it { should belong_to :flight }
 
   it 'has valid setup' do
@@ -20,7 +20,7 @@ RSpec.describe Booking, type: :model do
   end
 
   it 'is invalid without a passenger' do
-    @booking.passenger = nil
+    @booking.passengers = []
     expect(@booking).to be_invalid
   end
 end

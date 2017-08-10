@@ -9,10 +9,10 @@ class BookingsController < ApplicationController
   def create
     booking_passengers = []
     params[:passengers].each do |m|
-        booking_passengers << Passenger.create(booking_params(m))
+        booking_passengers << Passenger.create(passenger_params(m))
     end
     @booking = Booking.new(flight: Flight.find(params[:flight_id]),
-                        passenger: booking_passengers)
+                       passengers: booking_passengers)
     if @booking.save
       redirect_to @booking
     end
@@ -24,7 +24,7 @@ class BookingsController < ApplicationController
 
   private
 
-  def booking_params(custom_params)
+  def passenger_params(custom_params)
     custom_params.permit(:name, :email)
   end
 
