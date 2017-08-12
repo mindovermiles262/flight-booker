@@ -2,6 +2,6 @@ class Passenger < ApplicationRecord
   validates :name,  presence: true
   validates :email, presence: true
 
-  has_one :booking
+  belongs_to :booking, optional: true
   has_one :flight, through: :booking
 end

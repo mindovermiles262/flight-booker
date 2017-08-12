@@ -1,20 +1,33 @@
+<% if @booking.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@booking.errors.count, "error") %> prohibited
+      this user from being saved:
+    </h2>
+
+    <ul>
+    <% @booking.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="section">
-  <%= form_for bookings_path, html: { class: 'columns' } do %>
-    <% @manifest.each_with_index do |m, i| %>
-      <%= fields_for 'passengers[]', m do |p| %>
-        <div class="column bg-translucent has-margins">
-          <%= p.label :name, "Passenger #{i + 1} Name", class: 'label' %>
-          <%= p.text_field :name, class: 'input', required: true %>
+  <%= form_for @booking, html: { class: 'columns' } do |booking_form|%>
+    <%= booking_form.fields_for :passengers do |p| %>
+      <div class="column bg-translucent has-margins">
+        <%= p.label :name, "Passenger Name", class: 'label' %>
+        <%= p.text_field :name, class: 'input', required: true %>
         
-          <%= p.label :email, class: 'label' %>
-          <%= p.text_field :email, class: 'input', required: true %>
-        </div>
-      <% end %>
+        <%= p.label :email, class: 'label' %>
+        <%= p.text_field :email, class: 'input', required: true %>
+      </div>
     <% end %>
 </div>
 
 <div class="column has-text-centered">
-    <%= hidden_field_tag :flight_id, params[:selected] %>
-    <%= submit_tag "Book Flight", name: nil, class: 'button is-primary is-large' %>
+    <%= booking_form.hidden_field "flight_id", value: params[:selected] %>
+    <%= booking_form.submit "Book Flight", name: nil, class: 'button is-primary is-large' %>
   <% end %>
 </div>
