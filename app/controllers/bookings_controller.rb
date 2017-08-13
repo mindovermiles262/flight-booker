@@ -9,7 +9,8 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to @booking
     else
-      @booking.save!
+      flash.now[:danger] = 'Unable to complete transatcion'
+      render :new
     end
   end
 
