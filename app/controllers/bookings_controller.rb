@@ -7,6 +7,10 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     if @booking.save
+      # Confirmation Email
+      @booking.passengers.each do |passenger|
+        BookingMailer.booking_email(passenger, @booking.id).deliver_now
+      end
       redirect_to @booking
     else
       flash.now[:danger] = 'Unable to complete transatcion'
